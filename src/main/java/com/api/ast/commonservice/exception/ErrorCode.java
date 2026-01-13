@@ -8,17 +8,9 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    DUPLICATED_USER_EMAIL(HttpStatus.CONFLICT, "User Email is duplicated"),
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User not founded"),
-    INVALID_USER_UUID(HttpStatus.UNAUTHORIZED, "User UUID is invalid"),
-    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "Password is invalid"),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
-    PROFILE_CREATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Profile Creation Error"),
-    PROFILE_DELETE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Profile Delete Error"),
-    INVALID_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, "Access Token is invalid"),
-    INVALID_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, "Refresh Token is invalid"),
-    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "Article not founded"),
-    INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "Permission is invalid");
+    GROUP_CODE_SELECT_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Select Error"),
+    GROUP_CODE_CREATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Create Error"),
+    GROUP_CODE_UPDATE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Group Code Update Error");
 
     private HttpStatus status;
     private String message;
