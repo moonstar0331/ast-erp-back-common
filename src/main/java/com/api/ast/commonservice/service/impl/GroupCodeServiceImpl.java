@@ -87,7 +87,7 @@ public class GroupCodeServiceImpl implements GroupCodeService {
         updateOne(dto);
 
         // 소속 공통코드 삭제
-
+        commonCodeService.deleteManyByGroupCodeId(groupCodeId);
     }
 
     @Override
