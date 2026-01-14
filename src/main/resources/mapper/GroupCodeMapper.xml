@@ -5,7 +5,7 @@
 
 <mapper namespace="com.api.ast.commonservice.mapper.GroupCodeMapper">
 
-    <insert id="insertOne" parameterType="GroupCodeDto">
+    <insert id="insertOne" parameterType="com.api.ast.commonservice.dto.group.GroupCodeDto">
         INSERT INTO common_code_group(
             group_code,
             group_name,
@@ -23,7 +23,7 @@
         )
     </insert>
 
-    <select id="selectOne" resultType="GroupCodeDto">
+    <select id="selectOne" resultType="com.api.ast.commonservice.dto.group.GroupCodeDto">
         SELECT
             group_code_id,
             group_code,
@@ -35,8 +35,7 @@
         AND deleted_yn = false
     </select>
 
-
-    <select id="selectAll" resultType="GroupCodeDto">
+    <select id="selectAll">
         SELECT
         group_code_id,
         group_code,
@@ -49,7 +48,7 @@
         WHERE deleted_yn = false
     </select>
 
-    <update id="updateOne" parameterType="GroupCodeDto">
+    <update id="updateOne" parameterType="com.api.ast.commonservice.dto.group.GroupCodeDto">
         UPDATE common_code_group
         SET
             group_code = #{groupCode.groupCode},

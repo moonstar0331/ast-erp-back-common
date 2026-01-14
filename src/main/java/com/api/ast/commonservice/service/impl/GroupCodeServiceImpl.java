@@ -1,16 +1,20 @@
 package com.api.ast.commonservice.service.impl;
 
 import com.api.ast.commonservice.dto.CommonCodeGroupDetailDto;
+import com.api.ast.commonservice.dto.code.CommonCodeDto;
 import com.api.ast.commonservice.dto.group.GroupCodeDto;
 import com.api.ast.commonservice.exception.CommonServiceException;
 import com.api.ast.commonservice.exception.ErrorCode;
 import com.api.ast.commonservice.mapper.GroupCodeMapper;
+import com.api.ast.commonservice.service.CommonCodeService;
 import com.api.ast.commonservice.service.GroupCodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -19,6 +23,8 @@ import java.util.List;
 public class GroupCodeServiceImpl implements GroupCodeService {
 
     private final GroupCodeMapper groupCodeMapper;
+
+    private final CommonCodeService commonCodeService;
 
     @Override
     @Transactional
@@ -76,12 +82,42 @@ public class GroupCodeServiceImpl implements GroupCodeService {
             throw new CommonServiceException(ErrorCode.GROUP_CODE_SELECT_ERROR);
         }
 
+        // 그룹코드 삭제
         dto.setDeletedYn(true);
         updateOne(dto);
+
+        // 소속 공통코드 삭제
+
     }
 
     @Override
     public CommonCodeGroupDetailDto selectOneWithCodes(Long groupCodeId) {
-        groupCodeMapper.selectOneWithCodes(groupCodeId);
+
+        ModelMapper mapper = new ModelMapper();
+
+        GroupCodeDto groupDto = groupCodeMapper.selectOne(groupCodeId);
+        CommonCodeGroupDetailDto result = mapper.map(groupDto, CommonCodeGroupDetailDto.class);
+
+        List<CommonCodeDto> codeList = commonCodeService.selectAllByGroupCodeId(groupCodeId);
+        result.setCodes(codeList);
+
+        return result;
+    }
+
+    @Override
+    public List<CommonCodeGroupDetailDto> selectAllWithCodes() {
+        List<GroupCodeDto> groupDtoList = groupCodeMapper.selectAll();
+
+        ModelMapper mapper = new ModelMapper();
+        List<CommonCodeGroupDetailDto> result = new ArrayList<>();
+
+        groupDtoList.forEach(groupDto -> {
+            CommonCodeGroupDetailDto groupDetailDto = mapper.map(groupDto, CommonCodeGroupDetailDto.class);
+            List<CommonCodeDto> codeList = commonCodeService.selectAllByGroupCodeId(groupDto.getGroupCodeId());
+            groupDetailDto.setCodes(codeList);
+            result.add(groupDetailDto);
+        });
+
+        return result;
     }
 }

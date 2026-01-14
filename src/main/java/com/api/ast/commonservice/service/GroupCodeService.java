@@ -19,4 +19,6 @@ public interface GroupCodeService {
     void deleteOne(Long groupCodeId);
 
     CommonCodeGroupDetailDto selectOneWithCodes(Long groupCodeId);
+
+    List<CommonCodeGroupDetailDto> selectAllWithCodes();
 }

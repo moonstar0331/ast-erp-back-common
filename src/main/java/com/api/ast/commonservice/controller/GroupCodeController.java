@@ -121,10 +121,31 @@ public class GroupCodeController {
 
     // 공통코드 + 그룹 상세 조회 (그룹코드 ID 로)
     @GetMapping("/code/list/{groupCodeId}")
-    public ResponseEntity<List<CommonCodeGroupDetailResponse>> selectOneWithCodes(@PathVariable Long groupCodeId) {
+    public ResponseEntity<CommonCodeGroupDetailResponse> selectOneWithCodes(@PathVariable Long groupCodeId) {
         CommonCodeGroupDetailDto result = groupCodeService.selectOneWithCodes(groupCodeId);
+
+        CommonCodeGroupDetailResponse response = new ModelMapper().map(result, CommonCodeGroupDetailResponse.class);
+
+        return ResponseEntity
+                .ok()
+                .body(response);
     }
 
     // 공통코드 + 그룹 전체 조회
     @GetMapping("/code/list")
+    public ResponseEntity<List<CommonCodeGroupDetailResponse>> selectAllWithCodes() {
+        List<CommonCodeGroupDetailDto> result = groupCodeService.selectAllWithCodes();
+
+        ModelMapper mapper = new ModelMapper();
+        List<CommonCodeGroupDetailResponse> response = new ArrayList<>();
+
+        result.forEach(dto -> {
+            CommonCodeGroupDetailResponse groupDetailResponse = mapper.map(dto, CommonCodeGroupDetailResponse.class);
+            response.add(groupDetailResponse);
+        });
+
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
 }

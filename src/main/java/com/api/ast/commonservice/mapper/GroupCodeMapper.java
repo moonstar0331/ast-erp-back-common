@@ -20,5 +20,4 @@ public interface GroupCodeMapper {
 
     int updateAll(@Param("groupCodeList") List<GroupCodeDto> groupCodeList);
 
-    CommonCodeGroupDetailDto selectOneWithCodes(@Param("groupCodeId") Long groupCodeId);
 }

@@ -1,0 +1,21 @@
+package com.api.ast.commonservice.mapper;
+
+import com.api.ast.commonservice.dto.code.CommonCodeDto;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+@Mapper
+public interface CommonCodeMapper {
+
+    int insertOne(@Param("commonCode") CommonCodeDto commonCode);
+
+    CommonCodeDto selectOne(@Param("codeId") Long codeId);
+
+    List<CommonCodeDto> selectAll();
+
+    List<CommonCodeDto> selectAllByGroupCodeId(@Param("groupCodeId") Long groupCodeId);
+
+    int updateOne(@Param("commonCode") CommonCodeDto commonCode);
+}
