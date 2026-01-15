@@ -1,6 +1,5 @@
 package com.api.ast.commonservice.mapper;
 
-import com.api.ast.commonservice.dto.CommonCodeGroupDetailDto;
 import com.api.ast.commonservice.dto.group.GroupCodeDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
