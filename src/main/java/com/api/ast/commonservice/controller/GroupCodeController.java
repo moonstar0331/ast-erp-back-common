@@ -2,7 +2,6 @@ package com.api.ast.commonservice.controller;
 
 import com.api.ast.commonservice.dto.CommonCodeGroupDetailDto;
 import com.api.ast.commonservice.dto.group.GroupCodeDto;
-import com.api.ast.commonservice.service.CommonCodeService;
 import com.api.ast.commonservice.service.GroupCodeService;
 import com.api.ast.commonservice.vo.request.group.GroupCodeCreateRequest;
 import com.api.ast.commonservice.vo.request.group.GroupCodeUpdateRequest;
@@ -23,7 +22,6 @@ import java.util.List;
 public class GroupCodeController {
 
     private final GroupCodeService groupCodeService;
-    private final CommonCodeService commonCodeService;
 
     // 공통코드 그룹 생성 (단건만)
     @PostMapping("/")
