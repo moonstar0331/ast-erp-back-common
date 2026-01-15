@@ -34,6 +34,18 @@ public class CommonCodeController {
 
     // 공통코드 다건 생성
     @PostMapping("/list")
+    public ResponseEntity<Void> insertMany(@RequestBody List<CommonCodeCreateRequest> request) {
+        List<CommonCodeDto> dtoList = new ArrayList<>();
+        ModelMapper mapper = new ModelMapper();
+        request.forEach(r -> {
+            CommonCodeDto dto = mapper.map(r, CommonCodeDto.class);
+            dtoList.add(dto);
+        });
+        commonCodeService.insertMany(dtoList);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .build();
+    }
 
     // 공통코드 상세 조회 (공통코드 ID로)
     @GetMapping("/{codeId}")
@@ -94,6 +106,26 @@ public class CommonCodeController {
 
     // 공통코드 다건 수정
     @PutMapping("")
+    public ResponseEntity<List<CommonCodeResponse>> updateMany(@RequestBody List<CommonCodeUpdateRequest> request) {
+        List<CommonCodeDto> dtoList = new ArrayList<>();
+        ModelMapper mapper = new ModelMapper();
+
+        request.forEach(r -> {
+            CommonCodeDto dto = mapper.map(r, CommonCodeDto.class);
+            dtoList.add(dto);
+        });
+
+        List<CommonCodeDto> result = commonCodeService.updateMany(dtoList);
+        List<CommonCodeResponse> response = new ArrayList<>();
+
+        result.forEach(r -> {
+            response.add(mapper.map(r, CommonCodeResponse.class));
+        });
+
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
 
     // 공통코드 단건 삭제
     @DeleteMapping("/{codeId}")

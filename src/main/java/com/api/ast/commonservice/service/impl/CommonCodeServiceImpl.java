@@ -31,6 +31,14 @@ public class CommonCodeServiceImpl implements CommonCodeService {
     }
 
     @Override
+    @Transactional
+    public void insertMany(List<CommonCodeDto> dtoList) {
+        for (CommonCodeDto dto : dtoList) {
+            insertOne(dto);
+        }
+    }
+
+    @Override
     public CommonCodeDto selectOne(Long codeId) {
         return commonCodeMapper.selectOne(codeId);
     }
@@ -56,6 +64,15 @@ public class CommonCodeServiceImpl implements CommonCodeService {
         }
 
         return commonCodeMapper.selectOne(dto.getCodeId());
+    }
+
+    @Override
+    @Transactional
+    public List<CommonCodeDto> updateMany(List<CommonCodeDto> dtoList) {
+        for (CommonCodeDto dto : dtoList) {
+            updateOne(dto);
+        }
+        return dtoList;
     }
 
     @Override

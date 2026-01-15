@@ -8,6 +8,8 @@ public interface CommonCodeService {
 
     void insertOne(CommonCodeDto dto);
 
+    void insertMany(List<CommonCodeDto> dtoList);
+
     CommonCodeDto selectOne(Long codeId);
 
     List<CommonCodeDto> selectAll();
@@ -15,6 +17,8 @@ public interface CommonCodeService {
     List<CommonCodeDto> selectAllByGroupCodeId(Long groupCodeId);
 
     CommonCodeDto updateOne(CommonCodeDto dto);
+
+    List<CommonCodeDto> updateMany(List<CommonCodeDto> dtoList);
 
     void deleteOne(Long codeId);
 
