@@ -16,7 +16,7 @@
             updated_at
         ) VALUES (
             #{commonCode.groupCodeId},
-            #{commonCode.parentCodeId},
+            #{commonCode.parentId},
             #{commonCode.codeValue},
             #{commonCode.codeName},
             #{commonCode.useYn},
@@ -65,7 +65,7 @@
             created_at,
             updated_at
         FROM common_code
-        WHERE parent_code_id = #{parentCodeId}
+        WHERE parent_code_id = #{parentId}
             AND deleted_yn = false
     </select>
 
@@ -88,7 +88,7 @@
     <update id="updateOne" parameterType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         UPDATE common_code
         SET
-            parent_code_id = #{commonCode.parentCodeId},
+            parent_code_id = #{commonCode.parentId},
             code_value = #{commonCode.codeValue},
             code_name = #{commonCode.codeName},
             use_yn = #{commonCode.useYn},

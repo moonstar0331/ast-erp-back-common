@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class CommonCodeResponse {
     private Long codeId;
     private Long groupCodeId;
-    private Long parentCodeId;
+    private Long parentId;
     private String groupCode;
     private String codeValue;
     private String codeName;

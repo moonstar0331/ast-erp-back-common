@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommonCodeCreateRequest {
     private Long groupCodeId;
-    private Long parentCodeId;
+    private Long parentId;
     private String codeValue;
     private String codeName;
     private String useYn;

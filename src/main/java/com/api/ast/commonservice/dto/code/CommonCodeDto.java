@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class CommonCodeDto {
     private Long codeId;
     private Long groupCodeId;
-    private Long parentCodeId;
+    private Long parentId;
     private Long groupCode;
     private String codeValue;
     private String codeName;
