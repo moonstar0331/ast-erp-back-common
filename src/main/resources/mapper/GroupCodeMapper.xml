@@ -35,7 +35,7 @@
         AND deleted_yn = false
     </select>
 
-    <select id="selectAll">
+    <select id="selectAll" resultType="com.api.ast.commonservice.dto.group.GroupCodeDto">
         SELECT
         group_code_id,
         group_code,
