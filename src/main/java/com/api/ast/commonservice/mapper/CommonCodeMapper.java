@@ -15,6 +15,8 @@ public interface CommonCodeMapper {
 
     List<CommonCodeDto> selectAll();
 
+    List<CommonCodeDto> selectAllByParentCodeId(@Param("parentCodeId") Long parentCodeId);
+
     List<CommonCodeDto> selectAllByGroupCodeId(@Param("groupCodeId") Long groupCodeId);
 
     int updateOne(@Param("commonCode") CommonCodeDto commonCode);

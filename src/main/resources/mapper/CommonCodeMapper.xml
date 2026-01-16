@@ -40,7 +40,7 @@
             AND deleted_yn = false
     </select>
 
-    <select id="selectAll">
+    <select id="selectAll" resultType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         SELECT
             code_id,
             group_code_id,
@@ -53,6 +53,22 @@
         FROM common_code
         WHERE deleted_yn = false
     </select>
+
+    <select id="selectAllByParentCodeId" resultType="com.api.ast.commonservice.dto.code.CommonCodeDto">
+        SELECT
+            code_id,
+            group_code,
+            parent_code_id,
+            code_value,
+            code_name,
+            use_yn,
+            created_at,
+            updated_at
+        FROM common_code
+        WHERE parent_code_id = #{parentCodeId}
+            AND deleted_yn = false
+    </select>
+
 
     <select id="selectAllByGroupCodeId" resultType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         SELECT

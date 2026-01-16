@@ -49,6 +49,12 @@ public class CommonCodeServiceImpl implements CommonCodeService {
     }
 
     @Override
+    public List<CommonCodeDto> selectAllByParentCodeId(Long parentCodeId) {
+        return commonCodeMapper.selectAllByParentCodeId(parentCodeId);
+    }
+
+
+    @Override
     public List<CommonCodeDto> selectAllByGroupCodeId(Long groupCodeId) {
         return commonCodeMapper.selectAllByGroupCodeId(groupCodeId);
     }

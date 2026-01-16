@@ -74,6 +74,23 @@ public class CommonCodeController {
                 .body(response);
     }
 
+    // 부모코드로 공통코드 전체 조회
+    @GetMapping("/list/{parentCodeId}")
+    public ResponseEntity<List<CommonCodeResponse>> selectAllByParentCodeId(@PathVariable Long parentCodeId) {
+        List<CommonCodeDto> result = commonCodeService.selectAllByParentCodeId(parentCodeId);
+        ModelMapper mapper = new ModelMapper();
+
+        List<CommonCodeResponse> response = new ArrayList<>();
+        result.forEach(
+                dto -> response.add(mapper.map(dto, CommonCodeResponse.class))
+        );
+
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
+
     // 공통코드 리스트 조회 (그룹ID로, 공통코드만 조회)
     @GetMapping("/list/{groupCodeId}")
     public ResponseEntity<List<CommonCodeResponse>> selectAllByGroupCodeId(@PathVariable Long groupCodeId) {

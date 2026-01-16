@@ -14,6 +14,8 @@ public interface CommonCodeService {
 
     List<CommonCodeDto> selectAll();
 
+    List<CommonCodeDto> selectAllByParentCodeId(Long parentCodeId);
+
     List<CommonCodeDto> selectAllByGroupCodeId(Long groupCodeId);
 
     CommonCodeDto updateOne(CommonCodeDto dto);
