@@ -11,6 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CommonCodeUpdateRequest {
     private Long codeId;
+    private Long parentCodeId;
+    private String codeValue;
     private String codeName;
     private String useYn;
 }

@@ -8,6 +8,7 @@
     <insert id="insertOne" parameterType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         INSERT INTO common_code (
             group_code_id,
+            parent_code_id,
             code_value,
             code_name,
             use_yn,
@@ -15,6 +16,7 @@
             updated_at
         ) VALUES (
             #{commonCode.groupCodeId},
+            #{commonCode.parentCodeId},
             #{commonCode.codeValue},
             #{commonCode.codeName},
             #{commonCode.useYn},
@@ -27,6 +29,7 @@
         SELECT
             code_id,
             group_code_id,
+            parent_code_id,
             code_value,
             code_name,
             use_yn,
@@ -41,6 +44,7 @@
         SELECT
             code_id,
             group_code_id,
+            parent_code_id,
             code_value,
             code_name,
             use_yn,
@@ -54,6 +58,7 @@
         SELECT
         code_id,
         group_code_id,
+        parent_code_id,
         code_value,
         code_name,
         use_yn,
@@ -67,6 +72,7 @@
     <update id="updateOne" parameterType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         UPDATE common_code
         SET
+            parent_code_id = #{commonCode.parentCodeId},
             code_value = #{commonCode.codeValue},
             code_name = #{commonCode.codeName},
             use_yn = #{commonCode.useYn},
