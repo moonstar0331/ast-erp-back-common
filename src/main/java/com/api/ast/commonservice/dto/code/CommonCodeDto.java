@@ -15,7 +15,7 @@ public class CommonCodeDto {
     private Long codeId;
     private Long groupCodeId;
     private Long parentCodeId;
-    private String groupCode;
+    private Long groupCode;
     private String codeValue;
     private String codeName;
     private String useYn;
