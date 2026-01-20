@@ -75,7 +75,7 @@ public class CommonCodeController {
     }
 
     // 부모코드로 공통코드 전체 조회
-    @GetMapping("/list/{parentCodeId}")
+    @GetMapping("/list/parent/{parentCodeId}")
     public ResponseEntity<List<CommonCodeResponse>> selectAllByParentCodeId(@PathVariable Long parentCodeId) {
         List<CommonCodeDto> result = commonCodeService.selectAllByParentCodeId(parentCodeId);
         ModelMapper mapper = new ModelMapper();
@@ -92,7 +92,7 @@ public class CommonCodeController {
 
 
     // 공통코드 리스트 조회 (그룹ID로, 공통코드만 조회)
-    @GetMapping("/list/{groupCodeId}")
+    @GetMapping("/list/group/{groupCodeId}")
     public ResponseEntity<List<CommonCodeResponse>> selectAllByGroupCodeId(@PathVariable Long groupCodeId) {
         List<CommonCodeDto> result = commonCodeService.selectAllByGroupCodeId(groupCodeId);
 
@@ -110,10 +110,8 @@ public class CommonCodeController {
 
     // 공통코드 단건 수정
     @PutMapping("/{codeId}")
-    public ResponseEntity<CommonCodeResponse> updateOne(@PathVariable Long codeId,
-                                                        @RequestBody CommonCodeUpdateRequest request) {
+    public ResponseEntity<CommonCodeResponse> updateOne(@RequestBody CommonCodeUpdateRequest request) {
         CommonCodeDto dto = new ModelMapper().map(request, CommonCodeDto.class);
-        dto.setCodeId(codeId);
         CommonCodeDto result = commonCodeService.updateOne(dto);
         CommonCodeResponse response = new ModelMapper().map(result, CommonCodeResponse.class);
         return ResponseEntity

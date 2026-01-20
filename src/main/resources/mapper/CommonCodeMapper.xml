@@ -57,7 +57,7 @@
     <select id="selectAllByParentCodeId" resultType="com.api.ast.commonservice.dto.code.CommonCodeDto">
         SELECT
             code_id,
-            group_code,
+            group_code_id,
             parent_code_id,
             code_value,
             code_name,
@@ -65,7 +65,7 @@
             created_at,
             updated_at
         FROM common_code
-        WHERE parent_code_id = #{parentId}
+        WHERE parent_code_id = #{parentCodeId}
             AND deleted_yn = false
     </select>
 
@@ -92,8 +92,15 @@
             code_value = #{commonCode.codeValue},
             code_name = #{commonCode.codeName},
             use_yn = #{commonCode.useYn},
-            updated_at = NOW(),
-            deleted_yn = #{commonCode.deleteYn}
+            updated_at = NOW()
+        WHERE code_id = #{commonCode.codeId}
+    </update>
+
+    <update id="deleteOne" parameterType="com.api.ast.commonservice.dto.code.CommonCodeDto">
+        UPDATE common_code
+        SET
+            deleted_yn = true,
+            updated_at = NOW()
         WHERE code_id = #{commonCode.codeId}
     </update>
 </mapper>

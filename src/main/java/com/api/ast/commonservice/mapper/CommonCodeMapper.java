@@ -20,4 +20,6 @@ public interface CommonCodeMapper {
     List<CommonCodeDto> selectAllByGroupCodeId(@Param("groupCodeId") Long groupCodeId);
 
     int updateOne(@Param("commonCode") CommonCodeDto commonCode);
+
+    void deleteOne(@Param("commonCode") CommonCodeDto commonCode);
 }

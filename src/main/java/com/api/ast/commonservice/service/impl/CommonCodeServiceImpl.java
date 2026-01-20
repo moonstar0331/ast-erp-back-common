@@ -90,7 +90,7 @@ public class CommonCodeServiceImpl implements CommonCodeService {
         }
 
         dto.setDeletedYn(true);
-        updateOne(dto);
+        commonCodeMapper.deleteOne(dto);
     }
 
     @Override
