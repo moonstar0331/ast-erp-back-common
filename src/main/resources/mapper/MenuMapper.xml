@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.ast.commonservice.mapper.MenuMapper">
+
+    <insert id="insertOne" parameterType="com.api.ast.commonservice.dto.menu.MenuDto">
+        INSERT INTO menu (parent_menu_id, menu_name, menu_code, menu_type_code, sort_order, path, use_yn)
+        VALUES (#{dto.parentMenuId}, #{dto.menuName}, #{dto.menuCode}, #{dto.menuTypeCode}, #{dto.sortOrder}, #{dto.path}, #{useYn})
+    </insert>
+
+    <select id="selectOne" parameterType="java.lang.Long" resultType="com.api.ast.commonservice.dto.menu.MenuDto">
+        WITH RECURSIVE menu_subtree AS (
+        -- 1. 기준 메뉴
+        SELECT
+        menu_id,
+        parent_menu_id,
+        menu_name,
+        menu_code,
+        menu_type_code,
+        sort_order,
+        path,
+        use_yn,
+        deleted_yn
+        FROM menu
+        WHERE menu_id = #{menuId}
+        AND use_yn = 'Y'
+        AND deleted_yn = false
+
+        UNION ALL
+
+        -- 2. 하위 메뉴
+        SELECT
+        m.menu_id,
+        m.parent_menu_id,
+        m.menu_name,
+        m.menu_code,
+        m.menu_type_code,
+        m.sort_order,
+        m.path,
+        m.use_yn,
+        m.deleted_yn
+        FROM menu m
+        INNER JOIN menu_subtree ms
+        ON m.parent_menu_id = ms.menu_id
+        WHERE m.use_yn = 'Y'
+        AND m.deleted_yn = false
+        )
+        SELECT *
+        FROM menu_subtree
+        ORDER BY sort_order
+    </select>
+
+    <select id="selectMenuTree" resultType="MenuDto">
+        WITH RECURSIVE menu_tree AS (
+        -- 1. 최상위 메뉴
+        SELECT
+        menu_id,
+        parent_menu_id,
+        menu_name,
+        menu_code,
+        menu_type_code,
+        sort_order,
+        path,
+        use_yn,
+        deleted_yn
+        FROM menu
+        WHERE parent_menu_id IS NULL
+        AND use_yn = 'Y'
+        AND deleted_yn = false
+
+        UNION ALL
+
+        -- 2. 하위 메뉴
+        SELECT
+        m.menu_id,
+        m.parent_menu_id,
+        m.menu_name,
+        m.menu_code,
+        m.menu_type_code,
+        m.sort_order,
+        m.path,
+        m.use_yn,
+        m.deleted_yn
+        FROM menu m
+        INNER JOIN menu_tree mt
+        ON m.parent_menu_id = mt.menu_id
+        WHERE m.use_yn = 'Y'
+        AND m.deleted_yn = false
+        )
+        SELECT *
+        FROM menu_tree
+        ORDER BY sort_order
+    </select>
+</mapper>
