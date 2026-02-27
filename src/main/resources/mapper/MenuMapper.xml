@@ -52,7 +52,7 @@
         ORDER BY sort_order
     </select>
 
-    <select id="selectMenuTree" resultType="MenuDto">
+    <select id="selectTree" resultType="MenuDto">
         WITH RECURSIVE menu_tree AS (
         -- 1. 최상위 메뉴
         SELECT
