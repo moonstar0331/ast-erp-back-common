@@ -11,4 +11,6 @@ public interface MenuService {
     MenuDto selectOne(Long menuId);
 
     List<MenuDto> selectTree();
+
+    List<MenuDto> selectChildren(Long menuId);
 }

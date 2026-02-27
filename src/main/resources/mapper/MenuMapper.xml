@@ -10,7 +10,7 @@
         VALUES (#{dto.parentMenuId}, #{dto.menuName}, #{dto.menuCode}, #{dto.menuTypeCode}, #{dto.sortOrder}, #{dto.path}, #{useYn})
     </insert>
 
-    <select id="selectOne" parameterType="java.lang.Long" resultType="com.api.ast.commonservice.dto.menu.MenuDto">
+    <select id="selectOne" parameterType="java.lang.Long" resultType="MenuDto">
         WITH RECURSIVE menu_subtree AS (
         -- 1. 기준 메뉴
         SELECT
@@ -92,5 +92,21 @@
         SELECT *
         FROM menu_tree
         ORDER BY sort_order
+    </select>
+
+    <select id="selectChildren" resultType="MenuDto">
+        SELECT
+            menu_id,
+            parent_menu_id,
+            menu_name,
+            menu_code,
+            menu_type_code,
+            sort_order,
+            path,
+            use_yn,
+            deleted_yn
+        FROM menu
+        WHERE parent_menu_id = #{menuId}
+        AND use_yn = 'Y'
     </select>
 </mapper>

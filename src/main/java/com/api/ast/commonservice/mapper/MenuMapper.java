@@ -13,4 +13,6 @@ public interface MenuMapper {
     MenuDto selectOne(Long menuId);
 
     List<MenuDto> selectTree();
+
+    List<MenuDto> selectChildren(Long menuId);
 }

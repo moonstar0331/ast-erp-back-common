@@ -63,4 +63,9 @@ public class MenuServiceImpl implements MenuService {
 
         return rootMenus;
     }
+
+    @Override
+    public List<MenuDto> selectChildren(Long menuId) {
+        return menuMapper.selectChildren(menuId);
+    }
 }

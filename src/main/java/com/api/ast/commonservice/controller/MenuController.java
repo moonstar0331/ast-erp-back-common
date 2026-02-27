@@ -52,6 +52,21 @@ public class MenuController {
                 .body(response);
     }
 
+    // 자식 메뉴 조회
+    @GetMapping("/children/{menuId}")
+    public ResponseEntity<List<MenuResponse>> selectChildren(@PathVariable Long menuId) {
+        List<MenuDto> result = menuService.selectChildren(menuId);
+
+        ModelMapper mapper = new ModelMapper();
+        List<MenuResponse> response = new ArrayList<>();
+        result.forEach(dto ->
+                response.add(mapper.map(dto, MenuResponse.class))
+        );
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
     // 메뉴 수정
 
     // 메뉴 삭제
