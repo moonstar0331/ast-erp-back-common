@@ -23,9 +23,9 @@ public class MenuResponse {
     private String path;
     private String useYn;
     private LocalDateTime createdAt;
-    private Long createdBy;
+    private String createdBy;
     private LocalDateTime updatedAt;
-    private Long updatedBy;
+    private String updatedBy;
 
     private List<MenuResponse> children = new ArrayList<>();
 }
